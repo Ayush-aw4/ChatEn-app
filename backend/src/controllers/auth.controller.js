@@ -32,8 +32,13 @@ if(user) return res.status(400).json({message: "Email already exists"})
     })
 
     if(newUser){
-        generateToken(newUser._id,res)
-        await newUser.save()
+        // before code rabbit
+        // generateToken(newUser._id,res)
+        // await newUser.save()
+
+        // after code rabbit
+        const savedUser = await newUser.save();
+        generateToken(savedUser._id,res);
 
         res.status(201).json({
             _id:newUser._id,
